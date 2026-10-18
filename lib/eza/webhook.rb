@@ -33,7 +33,7 @@ module Eza
         raise SignatureError, "Webhook timestamp outside tolerance zone (#{tolerance}s)"
       end
 
-      signed_payload = "t.#{timestamp}.#{raw_body}"
+      signed_payload = "#{timestamp}.#{raw_body}"
       computed = OpenSSL::HMAC.hexdigest("SHA256", secret, signed_payload)
 
       unless secure_compare(computed, signature)
